@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bills That Did the Opposite, Part 3 — The Weber County Hive</title>
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-edge:#FEFCE8;
+    --charcoal:#1F2937;
+    --charcoal-2:#1F2937;
+    --ink:#1F2937;
+    --ink-soft:#4B5563;
+    --amber:#EAB308;
+    --amber-deep:#A16207;
+    --rust:#B42318;
+    --rule:#E5E7EB;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Georgia",serif;
+    line-height:1.6;
+    font-size:19px;
+  }
+  h1,h2,h3,.display{
+    font-family:"Playfair Display","Georgia",serif;
+    font-weight:700;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  a{color:var(--amber-deep);}
+  .wrap{max-width:780px;margin:0 auto;padding:0 24px;}
+
+  /* ---- header band ---- */
+  header.masthead{
+    background:linear-gradient(180deg,var(--charcoal) 0%,var(--charcoal-2) 100%);
+    color:#F3F4F6;
+    padding:44px 0 40px;
+    border-bottom:6px solid var(--amber);
+  }
+  .case-label{
+    font-size:0.78rem;
+    color:#FDE68A;
+    letter-spacing:0.06em;
+    margin-bottom:14px;
+  }
+  header.masthead h1{
+    color:#FFFFFF;
+    font-size:2.5rem;
+    line-height:1.12;
+    margin:0 0 16px;
+    max-width:14ch;
+  }
+  .dek{
+    font-size:1.15rem;
+    color:#F3F4F6;
+    max-width:58ch;
+    margin:0;
+    font-style:italic;
+  }
+  .masthead-meta{
+    margin-top:24px;
+    font-size:0.85rem;
+    color:#D1D5DB;
+  }
+
+  section{padding:44px 0;}
+  section + section{border-top:1px solid var(--rule);}
+
+  h2{font-size:1.5rem;margin:0 0 6px;padding-bottom:10px;border-bottom:3px solid var(--amber);display:inline-block;}
+  h3{font-size:1.15rem;margin:28px 0 8px;color:var(--charcoal);}
+  p{margin:0 0 16px;max-width:72ch;}
+
+  /* ---- start here ---- */
+  .start-here{
+    background:var(--paper-edge);
+    border-left:4px solid var(--amber);
+    padding:20px 24px;
+    margin:0 0 8px;
+  }
+  .start-here h2{border:none;padding:0;font-size:1.2rem;margin-bottom:10px;}
+  .start-here p:last-child{margin-bottom:0;}
+
+  /* ---- rubric ---- */
+  .rubric-q{
+    display:grid;
+    grid-template-columns:56px 1fr;
+    gap:4px 18px;
+    margin:22px 0;
+  }
+  .rubric-q .num{
+    font-family:"Playfair Display",serif;
+    font-size:2rem;
+    color:var(--amber);
+    line-height:1;
+  }
+  .rubric-q .qtitle{font-weight:700;margin-bottom:4px;}
+  .grade-key{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:20px 0 4px;
+  }
+  .grade-pill{
+    border:1px solid var(--rule);
+    background:#fff;
+    padding:6px 14px;
+    font-size:0.85rem;
+    border-radius:2px;
+  }
+  .grade-pill b{color:var(--ink);}
+
+  /* ---- case cards ---- */
+  .case{
+    margin-top:6px;
+  }
+  .case-num{
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .case h2{font-size:1.6rem;}
+  .bill-chip{
+    display:inline-block;
+    background:var(--charcoal);
+    color:#FFFFFF;
+    font-size:0.8rem;
+    padding:3px 10px;
+    border-radius:2px;
+    margin-right:8px;
+    margin-bottom:14px;
+  }
+  .looked-like, .actually{
+    padding:16px 20px;
+    margin:14px 0;
+    border-radius:2px;
+  }
+  .looked-like{
+    background:#FEFCE8;
+    border-left:4px solid var(--ink-soft);
+  }
+  .actually{
+    background:#FDECEA;
+    border-left:4px solid var(--rust);
+  }
+  .looked-like .label, .actually .label{
+    font-weight:700;
+    font-size:0.78rem;
+    letter-spacing:0.04em;
+    display:block;
+    margin-bottom:6px;
+  }
+  .looked-like .label{color:var(--ink-soft);}
+  .actually .label{color:var(--rust);}
+
+  .grade-box{
+    display:flex;
+    gap:14px;
+    align-items:center;
+    background:#fff;
+    border:1px solid var(--rule);
+    padding:14px 18px;
+    margin:16px 0;
+  }
+  .grade-box .letter{
+    font-family:"Playfair Display",serif;
+    font-size:2.2rem;
+    color:var(--amber-deep);
+    line-height:1;
+  }
+  .grade-box .desc{font-size:0.92rem;color:var(--ink-soft);}
+
+  details.diagram, details.sources-toggle, details.qa, details.votes{
+    margin:10px 0;
+    border:1px solid var(--rule);
+    background:#fff;
+  }
+  details.diagram summary, details.sources-toggle summary, details.qa summary, details.votes summary{
+    cursor:pointer;
+    padding:12px 16px;
+    font-weight:700;
+    list-style:none;
+  }
+  details.diagram summary::-webkit-details-marker,
+  details.sources-toggle summary::-webkit-details-marker,
+  details.qa summary::-webkit-details-marker,
+  details.votes summary::-webkit-details-marker{display:none;}
+  details.diagram summary::before,
+  details.sources-toggle summary::before,
+  details.qa summary::before,
+  details.votes summary::before{content:"+ ";color:var(--amber-deep);}
+  details[open] summary::before{content:"\2212 ";}
+  details.diagram .diagram-body, details.qa .qa-body{padding:0 16px 16px;}
+
+  .sponsor-line{
+    font-size:0.88rem;
+    color:var(--ink-soft);
+    margin:-6px 0 14px;
+  }
+  .sponsor-line b{color:var(--ink);}
+
+  .votes .vote-body{padding:0 16px 16px;}
+  .vote-tally{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+    font-size:0.9rem;
+  }
+  .vote-tally span b{font-size:1.1rem;}
+  .vote-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0 20px;
+  }
+  .vote-cols h4{
+    font-family:"Playfair Display",serif;
+    font-size:0.85rem;
+    margin:10px 0 4px;
+    color:var(--ink);
+  }
+  .vote-cols .yes-h{color:#1E7B3C;}
+  .vote-cols .no-h{color:var(--rust);}
+  .vote-names{
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    line-height:1.5;
+    margin:0 0 10px;
+  }
+  .vote-note{
+    font-size:0.88rem;
+    color:var(--ink-soft);
+    font-style:italic;
+    border-top:1px solid var(--rule);
+    padding-top:8px;
+    margin-top:6px;
+  }
+
+  .open-question{
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    font-style:italic;
+    margin-top:10px;
+  }
+
+  .compare-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.9rem;}
+  .compare-table th{background:var(--charcoal);color:#FFFFFF;text-align:left;padding:10px 12px;font-family:"Playfair Display",serif;font-weight:700;}
+  .compare-table td{padding:12px;border-bottom:1px solid var(--rule);background:#fff;vertical-align:top;}
+  .compare-table td.yes{color:#1E7B3C;font-weight:700;}
+  .compare-table td.no{color:var(--rust);font-weight:700;}
+  .compare-table tr td:first-child{font-weight:700;width:26%;}
+
+  .not-yet-box{background:#FDECEA;border-left:4px solid var(--rust);padding:16px 20px;margin:16px 0;}
+  .not-yet-box .label{font-weight:700;font-size:0.78rem;letter-spacing:0.04em;color:var(--rust);display:block;margin-bottom:8px;}
+  .not-yet-box ul{margin:0;padding-left:20px;}
+  .not-yet-box li{margin-bottom:6px;}
+
+  .conflict-callout{
+    background:var(--charcoal);color:#F3F4F6;padding:16px 20px;margin:14px 0;
+    border-left:5px solid var(--amber);font-size:0.92rem;
+  }
+  .conflict-callout b{color:#FDE68A;}
+
+  .fix-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.88rem;}
+  .fix-table th{background:var(--charcoal);color:#FFFFFF;text-align:left;padding:10px 12px;font-family:"Playfair Display",serif;font-weight:700;}
+  .fix-table td{padding:12px;border-bottom:1px solid var(--rule);background:#fff;vertical-align:top;}
+  .fix-table tr td:first-child{background:#FDECEA;border-right:3px solid var(--rust);width:44%;}
+  .fix-table tr td:last-child{border-left:3px solid #1E7B3C;}
+
+  /* ---- questions worth asking ---- */
+  .questions-box{
+    background:var(--charcoal);
+    color:#F3F4F6;
+    padding:28px 26px;
+    border-left:6px solid #FDE68A;
+  }
+  .questions-box .qw-label{
+    color:#FDE68A;
+    font-size:0.8rem;
+    letter-spacing:0.06em;
+    margin-bottom:14px;
+  }
+  .questions-box ol{margin:0;padding-left:22px;}
+  .questions-box li{
+    font-family:"Playfair Display",serif;
+    font-size:1.1rem;
+    margin-bottom:16px;
+  }
+  .questions-box li::marker{color:#FDE68A;}
+
+  footer{
+    padding:30px 0 60px;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+  }
+  ul{padding-left:20px;}
+  li{margin-bottom:6px;}
+  .hs-note{background:#FEFCE8;border-left:4px solid #A16207;padding:10px 14px;margin:12px 0 16px;font-size:.95rem;max-width:72ch;}
+  .hs-note b{color:#1F2937;}
+  .hs-partline{font-family:Arial,sans-serif;font-size:1.05rem;font-weight:bold;color:#FDE68A;margin:0 0 10px;}
+  .srcgroup h4{font-family:Arial,sans-serif;font-size:1rem;margin:16px 0 6px;}
+  .srcgroup li{font-size:.95rem;}
+  @media(max-width:600px){
+    .wrap{padding:0 16px;}
+    header.masthead h1{font-size:2rem;}
+    .vote-cols{grid-template-columns:1fr;}
+    .compare-table th,.compare-table td,.fix-table th,.fix-table td{padding:8px 7px;}
+    .compare-table tr td:first-child{width:auto;}
+    .questions-box{padding:22px 18px;}
+  }
+
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:10px 20px;}
+.hb-bar a{display:flex;align-items:center;gap:12px;max-width:1100px;margin:0 auto;text-decoration:none;}
+.hb-bar img{width:52px;height:52px;border-radius:4px;display:block;flex:none;}
+.hb-name{font-family:'Cinzel','Trajan Pro',Georgia,serif;color:#d4af37;font-size:16px;letter-spacing:.14em;text-transform:uppercase;line-height:1.2;display:block;}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12.5px;letter-spacing:.02em;display:block;margin-top:2px;}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 20px 30px;font-family:Georgia,serif;}
+.hb-foot img{width:52px;height:52px;display:block;margin:0 auto 10px;}
+.hb-foot .hb-name{font-size:14px;}
+.hb-foot .hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block;}
+@media(max-width:600px){.hb-bar{padding:8px 16px}.hb-bar img{width:38px;height:38px}.hb-name{font-size:13px}.hb-sub{font-size:11.5px}}
+
+html{font-size:112.5%}
+.hs-short{background:#FFFFFF;border:1px solid #E5E7EB;border-left:6px solid #A16207;padding:18px 22px;margin:0 0 24px}
+.hs-short ul{margin:0;padding-left:22px}
+.hs-short li{margin-bottom:8px;max-width:68ch}
+.hs-toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.hs-toc a{font-family:Arial,sans-serif;font-size:.85rem;padding:8px 13px;border:1px solid #E5E7EB;background:#FFFFFF;color:#1F2937;text-decoration:none;border-radius:999px}
+.hs-toc a:hover{border-color:#A16207}
+.hs-plain{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:#FEFCE8;border:1px dashed #A16207;padding:14px 18px;margin:20px 0;font-size:1rem}
+.hs-btn{display:inline-block;background:#A16207;color:#fff !important;text-decoration:none;font-family:Arial,sans-serif;font-weight:bold;padding:11px 18px;border-radius:6px}
+.hs-pages{background:#FFFFFF;border:1px solid #E5E7EB;margin:0 0 24px}
+.hs-pages summary{cursor:pointer;padding:13px 18px;font-family:Arial,sans-serif;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:#1F2937;font-weight:bold}
+.hs-pages ol{margin:0;padding:4px 18px 16px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:6px 18px}
+.hs-pages li{font-size:.95rem;line-height:1.35}
+.hs-pages li.cur{font-weight:bold}
+.hs-pages li.cur a{color:#1F2937;text-decoration:none}
+.hs-pages small{display:block;font-size:.8rem;color:#4B5563;font-weight:normal}
+.hs-parts{background:#FEFCE8;border:2px solid #A16207;border-radius:6px;padding:14px 16px;margin:0 0 24px;font-family:Arial,sans-serif}
+.hs-parts .lab{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-weight:bold;color:#1F2937;margin:0 0 8px}
+.hs-parts ol{margin:0 0 10px;padding-left:24px;font-size:1rem;line-height:1.45}
+.hs-parts li.cur{font-weight:bold}
+.hs-parts li.cur a{color:#1F2937;text-decoration:none}
+.hs-parts .nav{display:flex;flex-wrap:wrap;gap:10px}
+.hs-parts .nav a{display:inline-block;background:#A16207;color:#fff;text-decoration:none;font-weight:bold;padding:10px 16px;border-radius:5px;font-size:1rem}
+.hs-flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.hs-flip{text-align:left;background:#FFFFFF;border:1px solid #E5E7EB;border-top:5px solid #A16207;padding:14px 16px;cursor:pointer;font:inherit;color:#1F2937;min-height:96px}
+.hs-flip .ft{font-weight:bold;font-size:1.05rem}
+.hs-flip .fh{font-family:Arial,sans-serif;font-size:.78rem;color:#4B5563;margin-top:6px}
+.hs-flip .fd{display:none;margin-top:8px;font-size:.95rem}
+.hs-flip[aria-expanded="true"] .fd{display:block}
+.hs-flip[aria-expanded="true"] .fh{display:none}
+.hs-qa{display:grid;gap:10px}
+.hs-qa div{background:#FFFFFF;border-left:4px solid #A16207;padding:12px 16px}
+.hs-qa b{display:block;font-family:Arial,sans-serif;font-size:.88rem;color:#A16207;margin-bottom:4px}
+.hs-counter{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.hs-counter div{background:#1F2937;color:#FFFFFF;padding:14px;text-align:center}
+.hs-counter .n{font-family:Arial,sans-serif;font-size:1.7rem;font-weight:bold}
+.hs-counter .l{font-size:.82rem}
+.hs-updates{font-family:Arial,sans-serif;font-size:.88rem;color:#4B5563;margin-top:14px}
+.hs-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.hs-cards a{display:block;background:#FFFFFF;border:1px solid #E5E7EB;border-top:5px solid #A16207;padding:14px 16px;text-decoration:none;color:#1F2937}
+.hs-cards a b{display:block;margin-bottom:4px}
+.hs-cards a span{font-size:.9rem;color:#4B5563}
+.hs-upd{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.hs-upd li{background:#FFFFFF;border:1px solid #E5E7EB;border-left:6px solid #A16207;padding:12px 16px}
+.hs-upd .d{display:block;font-family:Arial,sans-serif;font-weight:bold;font-size:.85rem;color:#A16207;margin-bottom:4px}
+.hs-upd .s{display:block;font-size:.85rem;color:#4B5563;margin-top:4px}
+.hs-bars{display:grid;grid-template-columns:minmax(110px,36%) 1fr;gap:12px 12px;align-items:center;font-family:Arial,sans-serif;font-size:1rem}
+.hs-bars .lab{text-align:right}
+.hs-bars .tr{display:flex;align-items:center}
+.hs-bars .fl{height:34px;background:#A16207;border-radius:0 4px 4px 0;flex-shrink:0}
+.hs-bars .fl.alt{background:#1F2937}
+.hs-bars .v{margin-left:8px;font-weight:bold}
+.hs-fig{background:#FFFFFF;border:1px solid #E5E7EB;padding:18px 20px;margin:0 0 24px}
+.hs-fig h3{margin:0 0 4px;font-size:1.15rem}
+.hs-fig .sub{font-family:Arial,sans-serif;font-size:.88rem;color:#4B5563;margin:0 0 14px}
+.hs-date{font-family:Arial,sans-serif;font-size:.9rem;margin-top:14px;opacity:.95}
+.mermaid{display:flex;justify-content:center;margin:12px 0}
+.mermaid svg{max-width:100% !important;height:auto}
+@media(max-width:640px){.hs-bars{grid-template-columns:minmax(90px,40%) 1fr;font-size:.9rem}}
+
+/* bait-and-switch repo additions, Oct. 18, 2026 */
+.ag{border:1px solid var(--rule);background:#fff;margin:14px 0}
+.ag>summary{cursor:pointer;padding:12px 16px;font-weight:700;list-style:none}
+.ag>summary::-webkit-details-marker{display:none}
+.ag>summary::before{content:"+ ";color:var(--amber-deep)}
+.ag[open]>summary::before{content:"\2212 "}
+.ag .agb{padding:0 16px 16px}
+.ag .case-num{font-size:.8rem;color:var(--ink-soft)}
+.ag h3{margin:8px 0 6px;font-size:1.05rem}
+.ag .sponsor-line{margin:0 0 10px}
+.grade-badge{display:inline-block;font-family:Arial,sans-serif;font-weight:700;font-size:.8rem;padding:3px 10px;border-radius:3px;background:var(--charcoal);color:#fff;margin-left:8px}
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:640px){.before-after{grid-template-columns:1fr}}
+.ba-box{border:1px solid var(--rule);padding:12px 14px;background:#fff;font-size:.95rem}
+.ba-box.before{border-top:3px solid var(--ink-soft)}
+.ba-box.after{border-top:3px solid var(--rust)}
+.ba-label{font-family:Arial,sans-serif;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:6px}
+.vote-box{font-family:Arial,sans-serif;font-size:.85rem;background:#FEFCE8;border:1px solid var(--rule);padding:10px 14px;margin:12px 0;color:var(--ink-soft)}
+.vote-box strong{color:var(--ink)}
+.verdict-box{background:#fff;border:1px solid var(--rule);padding:12px 16px;margin:12px 0}
+.verdict-box h4{margin:0 0 8px;font-family:Arial,sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.vline{display:flex;gap:10px;align-items:flex-start;margin:7px 0;font-size:.95rem}
+.vline .mark{font-weight:700;flex-shrink:0;width:18px}
+.vline.yes .mark{color:var(--amber-deep)}
+.vline.open .mark{color:var(--ink-soft)}
+.crosslink{background:#FEFCE8;border-left:4px solid var(--amber);padding:12px 16px;margin:12px 0;font-size:.95rem}
+.crosslink .cl-label{font-family:Arial,sans-serif;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--amber-deep);font-weight:700;margin-bottom:4px}
+.pattern-note{background:#fff;border:1px dashed var(--amber);padding:12px 16px;margin:14px 0;font-size:.96rem}
+.rubric-table,.tier-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+.rubric-table th,.tier-table th,.kill-table th{background:var(--charcoal);color:#fff;text-align:left;padding:9px 10px;font-family:Arial,sans-serif;font-size:.8rem}
+.rubric-table td,.tier-table td{padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top;background:#fff}
+.rubric-table td:first-child{font-weight:700;white-space:nowrap}
+.tier-high{color:var(--rust);font-weight:700}
+.tier-mid{color:var(--amber-deep);font-weight:700}
+.tier-low{color:var(--ink-soft)}
+.corr{background:#FFF7E6;border-left:4px solid #B7791F;padding:10px 14px;margin:12px 0;font-size:.95rem;max-width:72ch}
+.corr b{color:#7A4E0B}
+.kill-wrap{overflow-x:auto;margin:14px 0}
+.kill-table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:560px}
+.kill-table td{padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top;background:#fff}
+.kill-table td:first-child{font-weight:700;white-space:nowrap}
+.tl2{list-style:none;padding:0;margin:14px 0;border-left:3px solid var(--amber)}
+.tl2 li{position:relative;padding:0 0 12px 18px;margin:0}
+.tl2 li::before{content:"";position:absolute;left:-8px;top:6px;width:13px;height:13px;border-radius:50%;background:#fff;border:3px solid var(--amber)}
+.tl2 li.hot::before{border-color:var(--rust);background:var(--rust)}
+.tl2 .when{display:block;font-family:Arial,sans-serif;font-size:.85rem;font-weight:700;color:var(--charcoal)}
+.bars2{display:grid;grid-template-columns:minmax(120px,40%) 1fr;gap:10px 12px;align-items:center;font-family:Arial,sans-serif;font-size:1rem;margin:10px 0}
+.bars2 .lab{text-align:right}
+.bars2 .tr{display:flex;align-items:center}
+.bars2 .fl{height:28px;background:var(--amber);border-radius:0 4px 4px 0;flex-shrink:0}
+.bars2 .fl.alt{background:var(--rust)}
+.bars2 .fl.mut{background:#94A3B8}
+.bars2 .v{margin-left:8px;font-weight:bold}
+@media(max-width:600px){.bars2{grid-template-columns:minmax(90px,42%) 1fr;font-size:.88rem}}
+
+
+.hs-btn,.hs-parts .nav a{background:#1F2937 !important;color:#fff !important}
+.hs-parts{border-color:#EAB308 !important}
+</style>
+<link rel="icon" type="image/png" href="hive-bee.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span></span></a></div>
+<header class="masthead">
+  <div class="wrap">
+    <div class="case-label">BAIT AND SWITCH &middot; CASE 2026-BSW-01</div>
+    <h1>Bills That Did the Opposite</h1>
+    <p class="hs-partline">Part 3 of 4: Nine more bills, 2025 and 2026</p>
+    <p class="dek">Nine more bills whose final version did something different from what its title or first draft said, and one that changed in the public's favor.</p>
+    <p class="hs-date">CASE 2026-BSW-01 · Posted Oct. 18, 2026 · Updated Oct. 18, 2026</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div style="padding-top:22px;">
+<div class="hs-plain">New to this? <a class="hs-btn" href="weber-hive-bait-and-switch-plain.html">Read it in plain words</a> About 900 words for all four parts, with simple charts.</div>
+<nav class="hs-parts" aria-label="Parts of this series"><p class="lab">Part 3 of 4</p><ol><li><a href="weber-hive-bait-and-switch.html">Part 1: The rubric and the first four bills</a></li><li><a href="weber-hive-bait-and-switch-part-2.html">Part 2: Four more bills, and the pattern</a></li><li class=cur><a href="bait-and-switch-part-3.html">Part 3: Nine more bills, 2025 and 2026</a></li><li><a href="bait-and-switch-part-4.html">Part 4: 11:59 p.m., and Congress too</a></li></ol><div class="nav"><a href="weber-hive-bait-and-switch-part-2.html">&larr; Back: Part 2</a><a href="bait-and-switch-part-4.html">Next: Part 4 &rarr;</a></div></nav>
+<div class="hs-short" id="short"><b style="display:block;font-size:1.1rem;margin-bottom:8px;">Short version</b><ul><li>Nine more cases: two first published Sept. 17, 2026 (Cases 9 and 10) and seven new ones checked against each bill's versions on le.utah.gov.</li><li>Case 11: S.B. 188 (2025) wrote an exemption into the cap on school lease revenue bonds. H.B. 332 (2026), which would have required a public vote first, was held and never reached the floor.</li><li>Case 12: H.B. 530 (2025) went the other way: its audit rules got stronger for the public between drafts.</li><li>Cases 13 to 15: S.B. 235 went from attorney general pay to governor pay; H.C.R. 9 went from the national debt to the Great Salt Lake; S.B. 254 was renamed and expanded ten minutes before the House vote.</li><li>Cases 16 and 17: S.B. 225 dropped a fixed water limit for the Inland Port Authority; H.B. 477 died, but its text passed inside S.B. 284.</li></ul></div>
+<nav class="hs-toc" aria-label="On this page"><b style="width:100%;font-family:Arial,sans-serif;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;">On this page</b><a href="#short">Short version</a><a href="#case9">Case 9</a><a href="#case10">Case 10</a><a href="#case11">Case 11</a><a href="#case12">Case 12</a><a href="#case13">Case 13</a><a href="#case14">Case 14</a><a href="#case15">Case 15</a><a href="#case16">Case 16</a><a href="#case17">Case 17</a><a href="#updates">Updates since this was posted</a><a href="#words">Words to know</a><a href="#ask">Questions to ask</a><a href="#connected">Connected Hive work</a><a href="#behind">Behind this piece</a><a href="#sources">Sources</a></nav>
+<details class="hs-pages"><summary>Bait-and-switch pages (6) · tap to open</summary><ol><li><a href="index.html">Bait-and-switch docket</a><small>Every case, searchable</small></li><li><a href="weber-hive-bait-and-switch-plain.html">In plain words</a><small>The short, simple version of all four parts</small></li><li><a href="weber-hive-bait-and-switch.html">Part 1: The rubric and the first four bills</a><small>Cases 1 to 4</small></li><li><a href="weber-hive-bait-and-switch-part-2.html">Part 2: Four more bills, and the pattern</a><small>Cases 5 to 8</small></li><li class=cur><a href="bait-and-switch-part-3.html">Part 3: Nine more bills, 2025 and 2026</a><small>Cases 9 to 17</small></li><li><a href="bait-and-switch-part-4.html">Part 4: 11:59 p.m., and Congress too</a><small>Cases 18 and 19, and the bills that never got a final vote</small></li><li><a href="https://weber-county-hive.github.io/Transparency/">Transparency docket</a><small>Where this series first ran</small></li></ol></details>
+</div>
+<section class="case" id="case9"><p class="hs-note" style="margin-top:0"><b>From the Sept. 17, 2026 page:</b> This case first ran as Case 9 of 10. It is kept here as first published, with a dated record check added below it.</p><div class="ag" style="padding:14px 16px">
+    <div class="case-num">CASE 9 <span class="grade-badge" style="margin-left:10px;">GRADE D</span></div>
+        <h3>H.B. 475 (2026), "Economic Development Council" — The Oversight Work Group That Vanished</h3>
+    <div class="sponsor-line">Chief Sponsor: Rep. Calvin Roberts &middot; Senate Sponsor: Sen. Kirk A. Cullimore</div>
+    <p>The bill created a new economic-development work group with named oversight seats built in. A floor substitute adopted roughly two minutes before final House passage quietly stripped those oversight seats out, without floor debate addressing the change on the record.</p>
+    <div class="verdict-box">
+      <h4>Verdict</h4>
+      <div class="vline yes"><span class="mark">&#10003;</span><span>Confirmed against the bill's own substitute history: the oversight seats present in the earlier version are absent from the substitute adopted immediately before passage.</span></div>
+      <div class="vline open"><span class="mark">?</span><span>Who requested the substitute, and why, isn't addressed in the public floor record.</span></div>
+    </div>
+    <div class="crosslink">
+      <div class="cl-label">Full case file — Bill-Tracker</div>
+      This case has its own deep-dive page with the complete timeline and sourcing: <a href="https://weber-county-hive.github.io/Bill-Tracker/weber-hive-hb475.html" target="_blank" rel="noopener">"The Oversight Work Group That Vanished Two Minutes Before Passage," CASE 2026-475-BSW</a>.
+    </div>
+  </div><p class="hs-note"><b>Added Oct. 18, 2026 (record check):</b> The bill's own title was "Development Planning and Coordination Amendments" in all five versions (introduced, three substitutes and enrolled), per the version texts on <a href="https://le.utah.gov/~2026/bills/static/HB0475.html" target="_blank" rel="noopener">le.utah.gov</a>. The names in this case's heading are the names of the council the bill creates. The introduced text "establishes the Economic Opportunity Coordinating Council" and "requires the council to create a work group to provide oversight for the opportunity zone application process in 2026." The 2nd substitute no longer contains a work group. The bill's status page shows the House adopted that substitute at 4:02 p.m. on Feb. 20, 2026 and passed the bill 61&ndash;4&ndash;10 at 4:04 p.m. The council's name became "Economic Development Council" in the 3rd substitute, which the Senate adopted on the floor March 4, 2026. Signed March 24, 2026. This check confirmed a work group "to provide oversight"; it did not confirm named seats.</p></section>
+<section class="case" id="case10"><p class="hs-note" style="margin-top:0"><b>From the Sept. 17, 2026 page:</b> This case first ran as Case 10 of 10. It is kept here as first published, with a dated record check added below it.</p><div class="ag" style="padding:14px 16px">
+    <div class="case-num">CASE 10 <span class="grade-badge" style="margin-left:10px;">GRADE C-</span></div>
+        <h3>H.B. 492 (2026), "Transportation, Infrastructure, and Housing Amendments" — The Loan That Lost Its Label</h3>
+    <div class="sponsor-line">Chief Sponsor: Rep. Calvin Roberts &middot; Senate Sponsor: Sen. Kirk A. Cullimore &middot; final substitute sponsored by Rep. Ken Ivory</div>
+    <p>As introduced, an $18 million loan inside this bill's new housing-infrastructure fund was explicitly labeled money for prison construction, with its own dedicated Utah Code section. The same introduced bill proposed merging two overlapping housing boards into one. By the 1st substitute, three weeks later, the prison label and the merger were both gone &mdash; the loan survives unlabeled inside a fund now branded for housing, and the state ended up with two boards instead of one.</p>
+    <div class="verdict-box">
+      <h4>Verdict</h4>
+      <div class="vline yes"><span class="mark">&#10003;</span><span>Confirmed directly against the bill's own tracked-changes redlines: both the prison-infrastructure language and the board-repeal language are present in the introduced text and absent from the 1st substitute (Feb. 18, 2026, committee vote 8-0-2).</span></div>
+      <div class="vline yes"><span class="mark">&#10003;</span><span>The state's own official fiscal note repeats the same omission &mdash; it describes the $18M loan only by recipient, never by original purpose.</span></div>
+      <div class="vline open"><span class="mark">?</span><span>Who specifically moved the Feb. 18 substitute, and whether either change was discussed on the record, isn't yet confirmed &mdash; only the aggregate 8-0-2 committee tally is.</span></div>
+    </div>
+    <div class="crosslink">
+      <div class="cl-label">Full case file — Bill-Tracker</div>
+      This case has its own deep-dive page with the complete timeline and sourcing: <a href="https://weber-county-hive.github.io/Bill-Tracker/weber-hive-hb492.html" target="_blank" rel="noopener">"The Loan That Lost Its Label," CASE 2026-492-BSW</a>.
+    </div>
+  </div><p class="hs-note"><b>Added Oct. 18, 2026 (record check):</b> <a href="https://le.utah.gov/~2026/bills/static/HB0492.html" target="_blank" rel="noopener">The bill's status page</a> confirms the House committee substitute on Feb. 18, 2026 (8&ndash;0&ndash;2), House passage 61&ndash;8&ndash;6 on Feb. 24, a Senate floor substitute at 9:38 p.m. on March 6, a conference committee substitute at 11:28 p.m. that night, and the governor's signature on March 25, 2026. The bill's title stayed the same in all seven versions.</p></section>
+<section class="case" id="case11">
+  <div class="case-num">CASE 11 OF 19</div>
+  <h2>The Cap That Got an Exemption, and the Fix That Never Got a Vote</h2>
+  <span class="bill-chip">S.B. 188 (2025)</span><span class="bill-chip">H.B. 332 (2026)</span>
+  <p class="sponsor-line"><b>S.B. 188:</b> Sen. Keith Grover (primary) / Rep. Stephanie Gricius &nbsp;&middot;&nbsp; <b>H.B. 332:</b> Rep. Tiara Auxier (primary)</p>
+  <div class="looked-like"><span class="label">WHAT IT LOOKED LIKE</span>S.B. 188, "School District Modifications," was a bill about splitting school districts: elections for new boards, start-up money and how debt is shared. Its title never changed in six versions.</div>
+  <div class="actually"><span class="label">WHAT THE RECORD SHOWS</span>Its final version says that when voters in a dividing district rejected a general obligation bond in the past three years, but voters in the area of a new district favored it, the old board "shall issue a lease revenue bond" for that new district, and that bond "is not subject to the combined total limitation described in Subsection 11-14-103(6)(b)(i)." A 2026 bill to require a public vote before any school lease revenue bond was held in committee and never reached the floor.</div>
+  <p>The exemption is in the <a href="https://le.utah.gov/Session/2025/bills/enrolled/SB0188.pdf" target="_blank" rel="noopener">enrolled text of S.B. 188</a>. The Legislature wrote its reason into the bill: the bond is exempt "due to the prior approval of voters within the new or reorganized new school district for the general obligation bond." That is a real argument, and it is quoted here in full. A lease revenue bond does not go to voters at all.</p><p>Earlier Hive research found the exemption was added in the House Education Committee on Feb. 27, 2025, in Amendment #2 moved by Rep. Matt MacPherson. The status page shows that committee's amendment votes were recorded, 12&ndash;0&ndash;4. The bill then went through a conference committee on the last day, 3:19 p.m., and passed both chambers without a "no" vote.</p><p>In 2026, H.B. 332 was introduced as "Local Building Authority Amendments" and renamed "School District Project Financing Amendments" in its 1st substitute (<a href="https://le.utah.gov/~2026/bills/static/HB0332.html" target="_blank" rel="noopener">le.utah.gov</a>). It would have required a school district to put a general obligation bond to voters before issuing a lease revenue bond. On Feb. 13, 2026 the House Political Subdivisions Committee approved a substitute 12&ndash;0&ndash;0 and then voted 12&ndash;0&ndash;0 to hold the bill. It was returned to the Rules Committee on March 2 and closed out at 11:59 p.m. on March 6 with 470 other bills (see <a href="bait-and-switch-part-4.html#midnight">Part 4</a>).</p>
+  <details class="diagram" open><summary>The timeline, from the bill's own status page</summary><div class="diagram-body"><ul class="tl2"><li><span class="when">2024</span>Earlier Hive research identified the combined cap as $200 million over three years, set by S.B. 86 (2024). This check did not re-open S.B. 86.</li><li><span class="when">Feb. 4, 2025</span>Senate Education Committee substitute, 5&ndash;0&ndash;2.</li><li class=hot><span class="when">Feb. 27, 2025</span>House Education Committee: substitute and two amendments, each 12&ndash;0&ndash;4. Earlier Hive research places the cap exemption in Amendment #2.</li><li><span class="when">March 7, 2025</span>Conference committee substitute at 3:19 p.m.; House 68&ndash;0&ndash;7 at 4:43 p.m.; Senate 24&ndash;0&ndash;5 at 5:52 p.m.</li><li><span class="when">March 17, 2025</span>Signed by the governor.</li><li class=hot><span class="when">Feb. 13, 2026</span>H.B. 332: committee substitute 12&ndash;0&ndash;0, then held 12&ndash;0&ndash;0.</li><li><span class="when">March 6, 2026, 11:59 p.m.</span>H.B. 332 closed out without a floor vote.</li></ul></div></details>
+  <div class="grade-box"><div class="letter">D</div><div class="desc"><b>Power:</b> A cap meant to limit borrowing without a public vote now has a written exemption, and the bill that would have required a vote first never reached either floor.<br><b>Transparency:</b> The exemption and its reason are in plain text in the enrolled law, and every committee and floor vote was recorded. That keeps this from an F.</div></div>
+  <p class="open-question">Open: Earlier Hive research found Alpine School District later brought about $201 million in lease revenue bonds to market. That figure has not been checked against the bond documents, so it is not counted here.</p>
+</section>
+<section class="case" id="case12">
+  <div class="case-num">CASE 12 OF 19</div>
+  <h2>The One That Went the Other Way</h2>
+  <span class="bill-chip">H.B. 530 (2025)</span>
+  <p class="sponsor-line"><b>Sponsor:</b> Rep. Karen M. Peterson (primary) / Sen. Kirk A. Cullimore</p>
+  <div class="looked-like"><span class="label">WHAT IT LOOKED LIKE</span>H.B. 530, "Utah Innovation Lab Modifications," moved the Utah innovation fund under the Nucleus Institute and set rules for the fund, including its yearly audit.</div>
+  <div class="actually"><span class="label">WHAT THE RECORD SHOWS</span>The audit language changed twice before passage, and the final version is stronger for the public than the first draft.</div>
+  <p>As introduced, the yearly audit could be done by the state auditor or by an independent auditor "selected by the institute board, chosen from a list of auditors approved by the state auditor." The 1st substitute changed that to an independent auditor engaged by the state auditor, "selected in consultation with the executive director." A House committee amendment on Feb. 25, 2025 (7&ndash;0&ndash;3) replaced it with "the state auditor's designee," and added that the designee may not have a business, contractual or other relationship with the institute (<a href="https://le.utah.gov/Session/2025/bills/enrolled/HB0530.pdf" target="_blank" rel="noopener">enrolled text</a>; <a href="https://le.utah.gov/~2025/bills/static/HB0530.html" target="_blank" rel="noopener">status page</a>).</p><p>This case is here for balance. A bill can change between drafts in the public's favor, and this one did, on a recorded vote.</p><p>Our earlier notes called this bill the "Nucleus Institute Act." Its title on le.utah.gov is "Utah Innovation Lab Modifications."</p>
+  <details class="diagram" open><summary>The timeline, from the bill's own status page</summary><div class="diagram-body"><ul class="tl2"><li><span class="when">Feb. 24, 2025</span>1st substitute filed by the sponsor in House Rules.</li><li class=hot><span class="when">Feb. 25, 2025</span>House committee amendment, 7&ndash;0&ndash;3: the audit goes to the state auditor's designee.</li><li><span class="when">Feb. 27, 2025</span>House passed it 71&ndash;0&ndash;4.</li><li><span class="when">March 4, 2025</span>Senate passed it 26&ndash;0&ndash;3.</li><li><span class="when">March 27, 2025</span>Signed by the governor.</li></ul></div></details>
+  <div class="grade-box"><div class="letter">B</div><div class="desc"><b>Power:</b> The audited group no longer picks its own auditor.<br><b>Transparency:</b> The fix came by a recorded committee vote. It took two rounds to get there, which is why this is a B and not an A.</div></div>
+  
+</section>
+<section class="case" id="case13">
+  <div class="case-num">CASE 13 OF 19</div>
+  <h2>A Raise for One Office Became a Raise for Another</h2>
+  <span class="bill-chip">S.B. 235 (2026)</span>
+  <p class="sponsor-line"><b>Sponsor:</b> Sen. Brady Brammer (primary) / Rep. Jordan D. Teuscher</p>
+  <div class="looked-like"><span class="label">WHAT IT LOOKED LIKE</span>Introduced Feb. 2, 2026 as "Attorney General Compensation Amendments." It set the attorney general's salary equal to the chief justice of the Utah Supreme Court's total pay, starting July 1, 2026. The Senate passed that version 25&ndash;0&ndash;4.</div>
+  <div class="actually"><span class="label">WHAT THE RECORD SHOWS</span>In the House, a committee substitute renamed it "Governor Compensation Amendments." The law now ties the governor's salary to the chief justice's total pay. The attorney general stays at 95% of the governor's salary, as before.</div>
+  <p>The change came in the House Business, Labor, and Commerce Committee on March 4, 2026 (10&ndash;0&ndash;6), after the bill was lifted from a different committee that had sent it back to Rules. The House passed the new version 67&ndash;2&ndash;6 the same afternoon, and the Senate agreed to it the next morning, 26&ndash;2&ndash;1 (<a href="https://le.utah.gov/~2026/bills/static/SB0235.html" target="_blank" rel="noopener">status page</a>; <a href="https://le.utah.gov/Session/2026/bills/introduced/SB0235.pdf" target="_blank" rel="noopener">introduced text</a>; <a href="https://le.utah.gov/Session/2026/bills/enrolled/SB0235.pdf" target="_blank" rel="noopener">enrolled text</a>).</p><p>Because the attorney general, lieutenant governor, state auditor and state treasurer are paid a share of the governor's salary (95% or 90%), a higher governor's salary raises theirs too. The attorney general still ends up with more, just by a different route.</p><p>Both chambers voted on the final version, and every vote was recorded. What changed is who the bill was about, and that happened in the second chamber, with two days left in the session.</p>
+  <details class="diagram" open><summary>The timeline, from the bill's own status page</summary><div class="diagram-body"><ul class="tl2"><li><span class="when">Feb. 2, 2026</span>Introduced as "Attorney General Compensation Amendments."</li><li><span class="when">Feb. 24, 2026</span>Senate passed the attorney general version 25&ndash;0&ndash;4.</li><li><span class="when">March 2, 2026</span>House Government Operations Committee returned it to Rules.</li><li class=hot><span class="when">March 4, 2026, 2:11 p.m.</span>House Business, Labor, and Commerce Committee substitute, 10&ndash;0&ndash;6: renamed "Governor Compensation Amendments."</li><li><span class="when">March 4, 2026, 5:49 p.m.</span>House passed it 67&ndash;2&ndash;6.</li><li><span class="when">March 5, 2026</span>Senate concurred 26&ndash;2&ndash;1.</li><li><span class="when">March 18, 2026</span>Signed by the governor.</li></ul></div></details>
+  <div class="grade-box"><div class="letter">C</div><div class="desc"><b>Power:</b> No public check was removed; the pay formula moved from one office to another.<br><b>Transparency:</b> The new title says plainly what the bill does, and both chambers voted on it. The subject changed late, in the second chamber.</div></div>
+  <p class="corr"><b>Correction to our earlier notes (Oct. 18, 2026):</b> Earlier research notes said Sen. Michael McKell introduced this bill and Sen. Brammer took it over. The introduced text lists Sen. Brady Brammer as primary sponsor from the start. Those notes also said the 1st substitute kept the attorney general provision; the substitute's summary covers only the governor.</p>
+</section>
+<section class="case" id="case14">
+  <div class="case-num">CASE 14 OF 19</div>
+  <h2>Same Number, New Subject</h2>
+  <span class="bill-chip">H.C.R. 9 (2026)</span>
+  <p class="sponsor-line"><b>Sponsor:</b> Rep. Joseph Elison (primary) / Sen. Scott D. Sandall</p>
+  <div class="looked-like"><span class="label">WHAT IT LOOKED LIKE</span>Introduced Jan. 30, 2026 as "Concurrent Resolution Addressing the National Debt." It "urges Congress to resolve the national debt" and to take "action towards balancing the federal budget."</div>
+  <div class="actually"><span class="label">WHAT THE RECORD SHOWS</span>The 1st substitute, adopted in House committee on Feb. 26, 2026, replaced it with "Concurrent Resolution Addressing the Great Salt Lake," which "urges federal assistance in stabilizing and restoring the Great Salt Lake." Same number, same sponsors.</div>
+  <p>A concurrent resolution states the Legislature's position; it does not change the law or spend money. The record still matters, because anyone following H.C.R. 9 by its first title would not know it became a Great Salt Lake resolution (<a href="https://le.utah.gov/~2026/bills/static/HCR009.html" target="_blank" rel="noopener">status page</a>; <a href="https://le.utah.gov/Session/2026/bills/introduced/HCR009.pdf" target="_blank" rel="noopener">introduced text</a>; <a href="https://le.utah.gov/Session/2026/bills/introduced/HCR009S01.pdf" target="_blank" rel="noopener">1st substitute</a>).</p><p>The House adopted a 2nd substitute on the floor on March 3 and passed it 70&ndash;1&ndash;4. On March 6 the Senate turned down a 3rd substitute drafted by Sen. Nate Blouin and passed the resolution 26&ndash;1&ndash;2.</p>
+  <details class="diagram" open><summary>The timeline, from the bill's own status page</summary><div class="diagram-body"><ul class="tl2"><li><span class="when">Jan. 30, 2026</span>Introduced as "Concurrent Resolution Addressing the National Debt."</li><li class=hot><span class="when">Feb. 26, 2026</span>House Natural Resources Committee substitute, 9&ndash;0&ndash;5: now about the Great Salt Lake.</li><li><span class="when">March 3, 2026</span>House floor substitute; House passed 70&ndash;1&ndash;4.</li><li><span class="when">March 6, 2026</span>Senate rejected a further substitute, then passed it 26&ndash;1&ndash;2.</li><li><span class="when">March 25, 2026</span>Signed by the governor.</li></ul></div></details>
+  <div class="grade-box"><div class="letter">C</div><div class="desc"><b>Power:</b> A resolution does not change anyone's rights or money.<br><b>Transparency:</b> The whole subject changed under one number, though the change was made in an open committee vote and the new title says what the resolution does.</div></div>
+  
+</section>
+<section class="case" id="case15">
+  <div class="case-num">CASE 15 OF 19</div>
+  <h2>Renamed, and Expanded, Ten Minutes Before the House Vote</h2>
+  <span class="bill-chip">S.B. 254 (2026)</span>
+  <p class="sponsor-line"><b>Sponsor:</b> Sen. Ann Millner (primary) / Rep. David Shallenberger</p>
+  <div class="looked-like"><span class="label">WHAT IT LOOKED LIKE</span>Introduced Feb. 5, 2026 as "Critical Minerals Amendments," with a council that can designate critical minerals zones and a Critical Minerals Development Account. The Senate passed its version 21&ndash;2&ndash;6 on Feb. 24.</div>
+  <div class="actually"><span class="label">WHAT THE RECORD SHOWS</span>A 3rd substitute filed at 7:48 p.m. on March 4 renamed it "Extracted Natural Resources Amendments." Its summary says it "creates the State Reinvestment Restricted Account and diverts various streams of income related to severance taxes" into it. The House adopted that substitute at 10:36 a.m. on March 5 and passed the bill ten minutes later.</div>
+  <p>The Senate then refused to agree to the House version. A conference committee wrote a 4th substitute that evening, and both chambers passed it on March 6: House 70&ndash;2&ndash;3, Senate 20&ndash;1&ndash;8. So both chambers did vote on the final law. The Senate's first vote was on a narrower critical-minerals bill (<a href="https://le.utah.gov/~2026/bills/static/SB0254.html" target="_blank" rel="noopener">status page</a>; <a href="https://le.utah.gov/Session/2026/bills/introduced/SB0254.pdf" target="_blank" rel="noopener">introduced text</a>; <a href="https://le.utah.gov/Session/2026/bills/introduced/SB0254S03.pdf" target="_blank" rel="noopener">3rd substitute</a>; <a href="https://le.utah.gov/Session/2026/bills/enrolled/SB0254.pdf" target="_blank" rel="noopener">enrolled text</a>).</p>
+  <details class="diagram" open><summary>The timeline, from the bill's own status page</summary><div class="diagram-body"><ul class="tl2"><li><span class="when">Feb. 9, 2026</span>Senate committee, 4&ndash;1&ndash;2.</li><li><span class="when">Feb. 23&ndash;24, 2026</span>Senate floor substitute; passed 28&ndash;1&ndash;0 and 21&ndash;2&ndash;6.</li><li><span class="when">March 2, 2026</span>House committee, 9&ndash;0&ndash;5.</li><li class=hot><span class="when">March 4, 2026, 7:48 p.m.</span>Renamed 3rd substitute filed: "Extracted Natural Resources Amendments."</li><li class=hot><span class="when">March 5, 2026, 10:36 a.m.</span>House adopts it; passes the bill 60&ndash;12&ndash;3 at 10:46 a.m.</li><li><span class="when">March 5, 2026, 8:36 p.m.</span>Conference committee substitute, 6&ndash;0&ndash;0.</li><li><span class="when">March 6, 2026</span>Final passage: House 70&ndash;2&ndash;3, Senate 20&ndash;1&ndash;8.</li><li><span class="when">March 26, 2026</span>Signed by the governor.</li></ul></div></details>
+  <div class="grade-box"><div class="letter">C</div><div class="desc"><b>Power:</b> A new restricted account and new severance-tax routing arrived in the second chamber.<br><b>Transparency:</b> The expansion was filed the night before and adopted ten minutes before a House vote, but both chambers then voted on the final version.</div></div>
+  <p class="corr"><b>Note for readers of our Bill-Tracker page on S.B. 254 (Oct. 18, 2026):</b> That page says the changes "never went back through a floor vote." The status page shows final passage votes in both chambers on March 6, 2026, after the conference committee. That page will be corrected.</p>
+</section>
+<section class="case" id="case16">
+  <div class="case-num">CASE 16 OF 19</div>
+  <h2>The Water Limit That Lost Its Number</h2>
+  <span class="bill-chip">S.B. 225 (2026)</span>
+  <p class="sponsor-line"><b>Sponsor:</b> Sen. Jerry W. Stevenson (primary) / Rep. Tyler Clancy</p>
+  <div class="looked-like"><span class="label">WHAT IT LOOKED LIKE</span>Introduced as "Utah Inland Port Authority Amendments." It barred using the Inland Port Authority's property tax differential to recruit new development in its Salt Lake City land that would use more than 200,000 gallons of drinking water a day.</div>
+  <div class="actually"><span class="label">WHAT THE RECORD SHOWS</span>The 1st substitute renamed it "Public Corporation Amendments." The 2nd substitute made the rule statewide and replaced the 200,000-gallon number with whatever limit the local water provider's own rules set.</div>
+  <p>Both changes in the water rule came in the 2nd substitute, adopted in the House Economic Development and Workforce Services Committee on Feb. 26, 2026 (9&ndash;0&ndash;1). The 3rd substitute, adopted on the House floor March 6, left that wording the same. The full version-by-version history is in our <a href="https://weber-county-hive.github.io/Bill-Tracker/weber-hive-sb225.html">Bill-Tracker case file</a> (<a href="https://le.utah.gov/~2026/bills/static/SB0225.html" target="_blank" rel="noopener">status page</a>).</p><p>The only person on record speaking in favor at the Senate committee was Charles Akerlow, lead developer on the Tooele Valley inland port project; seven people spoke against it, per that committee's minutes as summarized in our case file.</p>
+  <details class="diagram" open><summary>The timeline, from the bill's own status page</summary><div class="diagram-body"><ul class="tl2"><li><span class="when">Jan. 30, 2026</span>Introduced as "Utah Inland Port Authority Amendments."</li><li class=hot><span class="when">Feb. 5, 2026</span>Senate committee 1st substitute, 3&ndash;0&ndash;3: renamed "Public Corporation Amendments."</li><li><span class="when">Feb. 23, 2026</span>Senate passed it 20&ndash;5&ndash;4.</li><li class=hot><span class="when">Feb. 26, 2026</span>House committee 2nd substitute, 9&ndash;0&ndash;1: statewide, no fixed gallon limit.</li><li><span class="when">March 6, 2026</span>House passed it 67&ndash;2&ndash;6 at 5:54 p.m., then substituted again and passed it 57&ndash;10&ndash;8 at 6:00 p.m.</li><li><span class="when">March 18, 2026</span>Signed by the governor.</li></ul></div></details>
+  <div class="grade-box"><div class="letter">D</div><div class="desc"><b>Power:</b> A fixed, statewide-checkable number became a limit set separately by each water provider.<br><b>Transparency:</b> The title stopped naming the Inland Port Authority, and the minutes record no debate on the water change itself.</div></div>
+  
+</section>
+<section class="case" id="case17">
+  <div class="case-num">CASE 17 OF 19</div>
+  <h2>A Bill That Died Inside a Bill That Passed</h2>
+  <span class="bill-chip">H.B. 477 (2026)</span><span class="bill-chip">S.B. 284 (2026)</span>
+  <p class="sponsor-line"><b>H.B. 477:</b> Rep. Jill Koford (primary) / Sen. Kirk A. Cullimore &nbsp;&middot;&nbsp; <b>S.B. 284:</b> Sen. Lincoln Fillmore (primary) / Rep. Jill Koford</p>
+  <div class="looked-like"><span class="label">WHAT IT LOOKED LIKE</span>H.B. 477, "Land Use Regulation Revisions," covered city incorporation requests, planning commissions, infrastructure completion assurances and detached accessory dwelling units. It never got a committee vote and was closed out March 6.</div>
+  <div class="actually"><span class="label">WHAT THE RECORD SHOWS</span>The same provisions appear in S.B. 284, "Local Land Use Modifications," from its 1st substitute on. S.B. 284 grew from about 26,000 words to about 37,000, passed, and was renamed "Local Land and Water Modifications" on the session's last night.</div>
+  <p>S.B. 284's introduced text does not mention detached accessory dwelling units; its 1st substitute, filed Feb. 23, 2026, mentions them 24 times, matching H.B. 477. Its summary adds H.B. 477's items word for word, such as amending "requirements for a modified feasibility request related to a proposed municipal incorporation" (<a href="https://le.utah.gov/Session/2026/bills/introduced/HB0477.pdf" target="_blank" rel="noopener">H.B. 477</a>; <a href="https://le.utah.gov/Session/2026/bills/introduced/SB0284.pdf" target="_blank" rel="noopener">S.B. 284 introduced</a>; <a href="https://le.utah.gov/Session/2026/bills/introduced/SB0284S01.pdf" target="_blank" rel="noopener">S.B. 284 1st substitute</a>).</p><p>The Senate passed S.B. 284 on Feb. 26, 21&ndash;3&ndash;5. In the House, the bill was held until the last night: a 6th substitute was adopted at 9:09 p.m. on March 6, the House passed it at 9:16 p.m. (61&ndash;7&ndash;7), and the Senate agreed at 11:43 p.m. (24&ndash;3&ndash;2), sixteen minutes before the session ended (<a href="https://le.utah.gov/~2026/bills/static/SB0284.html" target="_blank" rel="noopener">status page</a>; <a href="https://le.utah.gov/~2026/bills/static/HB0477.html" target="_blank" rel="noopener">H.B. 477 status page</a>).</p>
+  <details class="diagram" open><summary>The timeline, from the bill's own status page</summary><div class="diagram-body"><ul class="tl2"><li><span class="when">Feb. 10, 2026</span>S.B. 284 introduced as "Local Land Use Modifications."</li><li class=hot><span class="when">Feb. 23&ndash;24, 2026</span>S.B. 284 1st substitute adds H.B. 477's provisions; Senate adopts it.</li><li><span class="when">Feb. 26, 2026</span>Senate passed S.B. 284 21&ndash;3&ndash;5.</li><li><span class="when">March 2, 2026</span>H.B. 477 returned to Rules by House committee, no vote recorded.</li><li class=hot><span class="when">March 6, 2026, 9:09 p.m.</span>House adopts 6th substitute, renamed "Local Land and Water Modifications"; passed 9:16 p.m.</li><li><span class="when">March 6, 2026, 11:43 p.m.</span>Senate concurred 24&ndash;3&ndash;2.</li><li><span class="when">March 6, 2026, 11:59 p.m.</span>H.B. 477 closed out.</li><li><span class="when">March 18, 2026</span>S.B. 284 signed by the governor.</li></ul></div></details>
+  <div class="grade-box"><div class="letter">D</div><div class="desc"><b>Power:</b> Land-use rules that never got their own hearing became law inside a different bill.<br><b>Transparency:</b> Anyone following H.B. 477 would see it fail; the same text passed under another number and, at the end, another name.</div></div>
+  <p class="corr"><b>Correction to our earlier notes (Oct. 18, 2026):</b> Those notes said S.B. 284 was retitled in its 5th and 7th substitutes. The version texts show the original title was already "Local Land Use Modifications," and it became "Local Land and Water Modifications" in the 6th substitute, the version that became law.</p>
+</section>
+<section id="updates">
+<h2>Updates since this was posted</h2>
+<p>News and records found online, with dates. Earlier entries are not changed.</p>
+<ul class="hs-upd"><li><span class="d">Oct. 18, 2026 (Hive records check)</span>Every bill on this page was checked against its status page and version texts on le.utah.gov. Findings are dated notes inside each case.<span class="s">Source: <a href="https://le.utah.gov/" target="_blank" rel="noopener">le.utah.gov</a></span></li><li><span class="d">Fall 2026 (Case 16)</span>Utah News Dispatch reported that Tooele County paused data center applications until it adopts a data center ordinance, and that the Inland Port Authority's executive director, Ben Hart, said of the Tooele Valley project, "I don't consider it alive right now." The article does not mention S.B. 225.<span class="s">Source: <a href="https://utahnewsdispatch.com/?p=19572" target="_blank" rel="noopener">Utah News Dispatch</a></span></li></ul>
+</section>
+<section id="words">
+<h2>Words to know</h2>
+<p>Tap a card to see what it means.</p>
+<div class="hs-flips"><button class="hs-flip" aria-expanded="false"><div class="ft">Concurrent resolution</div><div class="fh">Tap to see</div><div class="fd">A statement of the Legislature's position. It does not change the law or spend money.</div></button><button class="hs-flip" aria-expanded="false"><div class="ft">Lease revenue bond</div><div class="fh">Tap to see</div><div class="fd">Borrowing repaid from lease payments on a building. It does not go to voters, unlike a general obligation bond.</div></button><button class="hs-flip" aria-expanded="false"><div class="ft">General obligation bond</div><div class="fh">Tap to see</div><div class="fd">Borrowing backed by property taxes. In Utah it needs voter approval.</div></button><button class="hs-flip" aria-expanded="false"><div class="ft">Conference committee</div><div class="fh">Tap to see</div><div class="fd">A small group from both chambers that writes a final version when the House and Senate disagree.</div></button><button class="hs-flip" aria-expanded="false"><div class="ft">Concur</div><div class="fh">Tap to see</div><div class="fd">When one chamber agrees to changes the other chamber made.</div></button><button class="hs-flip" aria-expanded="false"><div class="ft">Property tax differential</div><div class="fh">Tap to see</div><div class="fd">The growth in property tax a development area keeps, instead of sending it to the usual taxing bodies.</div></button><button class="hs-flip" aria-expanded="false"><div class="ft">Returned to Rules</div><div class="fh">Tap to see</div><div class="fd">A committee sends a bill back to the Rules Committee without recommending it. It waits there unless it is moved out.</div></button></div>
+</section>
+<section id="ask">
+<h2>Questions to ask, and whom to ask</h2>
+<div class="hs-qa"><div><b>Your state legislators</b>Should a bill's title and summary have to be updated, before the next vote, whenever a substitute changes what it does?</div><div><b>House and Senate Rules Committees</b>Why did H.B. 332 and H.B. 477 never come out of committee or Rules for a vote?</div><div><b>Utah Inland Port Authority</b>Which water providers' limits now apply in each of its project areas, and where can the public read them?</div><div><b>Your school district</b>Has the district used, or does it plan to use, a lease revenue bond under the S.B. 188 exemption?</div><div><b>Governor's office and Legislative Fiscal Analyst</b>What did S.B. 235 change in the governor's and the attorney general's salaries for fiscal 2027?</div></div>
+</section>
+<section id="connected">
+<h2>Connected Hive work</h2>
+<div class="hs-cards"><a href="index.html"><b>Bait-and-switch docket</b><span>Every case in this series</span></a><a href="weber-hive-bait-and-switch-part-2.html"><b>Part 2: Four more bills, and the pattern</b><span>This series</span></a><a href="bait-and-switch-part-4.html"><b>Part 4: 11:59 p.m., and Congress too</b><span>This series</span></a><a href="https://weber-county-hive.github.io/Bill-Tracker/weber-hive-hb475.html"><b>H.B. 475</b><span>Bill-Tracker: the oversight work group that vanished</span></a><a href="https://weber-county-hive.github.io/Bill-Tracker/weber-hive-hb492.html"><b>H.B. 492</b><span>Bill-Tracker: the loan that lost its label</span></a><a href="https://weber-county-hive.github.io/Bill-Tracker/weber-hive-sb225.html"><b>S.B. 225</b><span>Bill-Tracker: the inland port water standard</span></a><a href="https://weber-county-hive.github.io/Bill-Tracker/weber-hive-sb254.html"><b>S.B. 254</b><span>Bill-Tracker: critical minerals</span></a><a href="https://weber-county-hive.github.io/Bill-Tracker/weber-hive-good-bills-died.html"><b>The Ones That Didn't Make It</b><span>Bill-Tracker: good bills that died</span></a></div>
+</section>
+<section id="behind">
+<h2>Behind this piece</h2>
+<div class="hs-counter"><div><div class="n">9</div><div class="l">Cases on this page</div></div><div><div class="n">13</div><div class="l">Bills checked on le.utah.gov</div></div><div><div class="n">41</div><div class="l">Bill versions opened</div></div><div><div class="n">1,004</div><div class="l">2026 bill records scanned for Part 4</div></div></div>
+<p class="hs-updates">Posted Oct. 18, 2026. Cases 9 and 10 first ran Sept. 17, 2026 and are kept as published. Every new fact was read from le.utah.gov status data and version texts (read as text), Oct. 18, 2026.</p>
+</section>
+<section id="sources">
+  <details class="sources-toggle">
+    <summary>Sources (tap to open)</summary>
+    <div class="qa-body"><ul>
+<li>Cases 9 and 10, as first published: The Weber County Hive, "Bills That Did the Opposite," Sept. 17, 2026.</li>
+<li>Status pages and version texts on le.utah.gov, read Oct. 18, 2026: <a href="https://le.utah.gov/~2026/bills/static/HB0475.html" target="_blank" rel="noopener">H.B. 475</a>, <a href="https://le.utah.gov/~2026/bills/static/HB0492.html" target="_blank" rel="noopener">H.B. 492</a>, <a href="https://le.utah.gov/~2025/bills/static/SB0188.html" target="_blank" rel="noopener">S.B. 188 (2025)</a>, <a href="https://le.utah.gov/~2026/bills/static/HB0332.html" target="_blank" rel="noopener">H.B. 332</a>, <a href="https://le.utah.gov/~2025/bills/static/HB0530.html" target="_blank" rel="noopener">H.B. 530 (2025)</a>, <a href="https://le.utah.gov/~2026/bills/static/SB0235.html" target="_blank" rel="noopener">S.B. 235</a>, <a href="https://le.utah.gov/~2026/bills/static/HCR009.html" target="_blank" rel="noopener">H.C.R. 9</a>, <a href="https://le.utah.gov/~2026/bills/static/SB0254.html" target="_blank" rel="noopener">S.B. 254</a>, <a href="https://le.utah.gov/~2026/bills/static/SB0225.html" target="_blank" rel="noopener">S.B. 225</a>, <a href="https://le.utah.gov/~2026/bills/static/HB0477.html" target="_blank" rel="noopener">H.B. 477</a>, <a href="https://le.utah.gov/~2026/bills/static/SB0284.html" target="_blank" rel="noopener">S.B. 284</a>.</li>
+<li>Enrolled texts: <a href="https://le.utah.gov/Session/2025/bills/enrolled/SB0188.pdf" target="_blank" rel="noopener">S.B. 188 (2025)</a>, <a href="https://le.utah.gov/Session/2025/bills/enrolled/HB0530.pdf" target="_blank" rel="noopener">H.B. 530 (2025)</a>, <a href="https://le.utah.gov/Session/2026/bills/enrolled/SB0235.pdf" target="_blank" rel="noopener">S.B. 235</a>, <a href="https://le.utah.gov/Session/2026/bills/enrolled/HCR009.pdf" target="_blank" rel="noopener">H.C.R. 9</a>, <a href="https://le.utah.gov/Session/2026/bills/enrolled/SB0254.pdf" target="_blank" rel="noopener">S.B. 254</a>, <a href="https://le.utah.gov/Session/2026/bills/enrolled/SB0225.pdf" target="_blank" rel="noopener">S.B. 225</a>, <a href="https://le.utah.gov/Session/2026/bills/enrolled/SB0284.pdf" target="_blank" rel="noopener">S.B. 284</a>.</li>
+<li>Earlier Hive research on S.B. 188 (House Education Committee minutes, Feb. 27, 2025) and H.B. 332 (House Political Subdivisions Committee minutes, Feb. 13, 2026), as provided by the publisher.</li>
+<li><a href="https://weber-county-hive.github.io/Bill-Tracker/weber-hive-sb225.html">Bill-Tracker: S.B. 225 case file</a> (Senate committee minutes, Feb. 5, 2026).</li>
+<li><a href="https://utahnewsdispatch.com/?p=19572" target="_blank" rel="noopener">Utah News Dispatch, "Concerns swirl over a developer's push for a Tooele Valley data center, but plans are on pause"</a></li>
+</ul></div>
+  </details>
+</section>
+<div style="padding:10px 0 30px;"><nav class="hs-parts" aria-label="Parts of this series"><p class="lab">Part 3 of 4</p><ol><li><a href="weber-hive-bait-and-switch.html">Part 1: The rubric and the first four bills</a></li><li><a href="weber-hive-bait-and-switch-part-2.html">Part 2: Four more bills, and the pattern</a></li><li class=cur><a href="bait-and-switch-part-3.html">Part 3: Nine more bills, 2025 and 2026</a></li><li><a href="bait-and-switch-part-4.html">Part 4: 11:59 p.m., and Congress too</a></li></ol><div class="nav"><a href="weber-hive-bait-and-switch-part-2.html">&larr; Back: Part 2</a><a href="bait-and-switch-part-4.html">Next: Part 4 &rarr;</a></div></nav></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    The Weber County Hive &middot; Independent accountability reporting on Weber County and Utah government. This page states what each public record says; it does not characterize any finding as a legal violation.
+  </div>
+</footer>
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent · Accountability · Journalism</span></div>
+
+<script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>document.querySelectorAll('.hs-flip').forEach(f=>f.addEventListener('click',()=>f.setAttribute('aria-expanded',f.getAttribute('aria-expanded')==='true'?'false':'true')));</script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>try{mermaid.initialize({startOnLoad:true,theme:'base',themeVariables:{fontFamily:"Arial, sans-serif",fontSize:'22px',primaryColor:'#FEFCE8',primaryTextColor:'#1F2937',primaryBorderColor:'#A16207',lineColor:'#854D0E',edgeLabelBackground:'#FFFFFF'},flowchart:{curve:'basis',padding:18,useMaxWidth:true}});}catch(e){}</script>
+</body>
+</html>
