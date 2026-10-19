@@ -116,7 +116,7 @@ const BS_CASES = [
   "link": "bait-and-switch-part-3.html#case13",
   "tag": "government",
   "year": 2026,
-  "grade": "C"
+  "grade": "C−"
  },
  {
   "n": 14,
